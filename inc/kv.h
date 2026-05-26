@@ -20,4 +20,6 @@ void kv_free(kv_t * table);
 
 int kv_put(kv_t * table, char * key, char * value);
 
+char * kv_get(kv_t * table, char * key);
+
 #endif //KV_H

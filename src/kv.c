@@ -90,3 +90,21 @@ int kv_put(kv_t * table, char * key, char * value) {
     // table is at capacity and we didn't find the provided key
     return -2;
 }
+
+char * kv_get(kv_t * table, char * key) {
+    if (table == NULL || key == NULL) return NULL;
+
+    size_t start = hash(key, table->capacity);
+    for (size_t i = 0; i < table->capacity; ++i) {
+        size_t index = (start + i) % table->capacity;
+
+        if (table->entries[index].key == NULL) return NULL;
+
+        if (table->entries[index].key == TOMBSTONE) continue;
+
+        if (strcmp(table->entries[index].key, key) == 0) return table->entries[index].value;
+    }
+
+    // no matching key in the table
+    return NULL;
+}
