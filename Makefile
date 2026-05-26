@@ -8,10 +8,12 @@ INCLUDES=inc
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
+	[ -d bin ] || mkdir bin
 	$(CC) $(CFLAGS) -I$(INCLUDES) $(OBJECTS) -o $(TARGET)
 
 obj/%.o: src/%.c
-	$(CC) $(CFLAGS) -I$(INCLUDES) $< -o $@
+	$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f *.o $(TARGET)
+	rm -f obj/*
+	rm -f $(TARGET)
