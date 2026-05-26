@@ -50,7 +50,7 @@ size_t hash(char * key, size_t capacity) {
     return hash % capacity;
 }
 
-size_t kv_put(kv_t * table, char * key, char * value) {
+int kv_put(kv_t * table, char * key, char * value) {
     if (table == NULL || key == NULL || value == NULL) return -1;
 
     size_t index = hash(key, table->capacity);
@@ -67,7 +67,7 @@ size_t kv_put(kv_t * table, char * key, char * value) {
             if (new_value == NULL) return -1;
             free(entry->value);
             entry->value = new_value;
-            return real_idx;
+            return (int)real_idx;
         }
 
         if (entry->key == NULL || entry->key == TOMBSTONE) {
@@ -83,7 +83,7 @@ size_t kv_put(kv_t * table, char * key, char * value) {
             entry->key = new_key;
             entry->value = new_value;
             table->count++;
-            return real_idx;
+            return (int)real_idx;
         }
     }
 
