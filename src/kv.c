@@ -50,7 +50,7 @@ size_t hash(char * key, size_t capacity) {
     return hash % capacity;
 }
 
-int kv_put(kv_t * table, char * key, char * value) {
+size_t kv_put(kv_t * table, char * key, char * value) {
     if (table == NULL || key == NULL || value == NULL) return -1;
 
     size_t index = hash(key, table->capacity);
