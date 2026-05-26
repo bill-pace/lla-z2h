@@ -1,17 +1,17 @@
 ﻿CC=gcc
 CFLAGS=-Wall -Wextra -Werror
-EXE=main
+TARGET=bin/dbview
 SOURCES=src/main.c src/kv.c
-OBJECTS=$(SOURCES:.c=.o)
-INCLUDES=./inc
+OBJECTS=$(patsubst src/%.c, obj/%.o, $(SOURCES))
+INCLUDES=inc
 
-all: $(SOURCES) $(EXE)
+all: $(TARGET)
 
-$(SOURCES):
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) -I$(INCLUDES) $(OBJECTS) -o $(TARGET)
+
+obj/%.o: src/%.c
 	$(CC) $(CFLAGS) -I$(INCLUDES) $< -o $@
 
-$(EXE): $(OBJECTS)
-	$(CC) $(CFLAGS) -I$(INCLUDES) $(OBJECTS) -o $(EXE)
-
 clean:
-	rm -f *.o $(EXE)
+	rm -f *.o $(TARGET)

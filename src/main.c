@@ -1,7 +1,6 @@
 ﻿#include "kv.h"
 
 #include <assert.h>
-#include <string.h>
 
 int main() {
     kv_t * table = kv_init(16);
