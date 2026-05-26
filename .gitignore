@@ -1,6 +1,6 @@
 ﻿# build artifacts
-**/*.o
-**/*.exe
+obj/**/*.o
+bin/**/*
 
 # IDE settings
 /.idea
