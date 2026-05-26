@@ -1,7 +1,7 @@
 ﻿CC=gcc
 CFLAGS=-Wall -Wextra -Werror
 EXE=main
-SOURCES=main.c kv.c
+SOURCES=src/main.c src/kv.c
 OBJECTS=$(SOURCES:.c=.o)
 
 all: $(SOURCES) $(EXE)
