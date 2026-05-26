@@ -108,3 +108,34 @@ char * kv_get(kv_t * table, char * key) {
     // no matching key in the table
     return NULL;
 }
+
+int kv_delete(kv_t * table, char * key) {
+    if (table == NULL || key == NULL) return -1;
+
+    size_t start = hash(key, table->capacity);
+
+    for (size_t i = 0; i < table->capacity; ++i) {
+        size_t index = (start + i) % table->capacity;
+
+        if (table->entries[index].key == NULL) return -1;
+        if (table->entries[index].key == TOMBSTONE) continue;
+
+        if (strcmp(table->entries[index].key, key) == 0) {
+            free(table->entries[index].key);
+            free(table->entries[index].value);
+            table->count--;
+
+            size_t next = index + 1;
+            if (table->entries[next].key != NULL) {
+                table->entries[index].key = TOMBSTONE;
+            } else {
+                table->entries[index].key = NULL;
+            }
+            table->entries[index].value = NULL;
+
+            return 0;
+        }
+    }
+
+    return -1;
+}

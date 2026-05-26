@@ -17,5 +17,11 @@ int main() {
     value = kv_get(table, "hehe");
     assert(strcmp(value, "haha") != 0);
 
+    int deleted = kv_delete(table, "hehe");
+    assert(deleted == 0);
+    assert(table->count == 0);
+    deleted = kv_delete(table, "hehe");
+    assert(deleted == -1);
+
     kv_free(table);
 }
