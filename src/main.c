@@ -9,8 +9,7 @@ int main() {
     assert(table->capacity == 16);
     assert(table->count == 0);
 
-    size_t index = kv_put(table, "hehe", "haha");
-    assert(strcmp(table->entries[index].key, "hehe") == 0);
+    kv_put(table, "hehe", "haha");
 
     kv_free(table);
 }

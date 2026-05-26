@@ -67,7 +67,7 @@ int kv_put(kv_t * table, char * key, char * value) {
             if (new_value == NULL) return -1;
             free(entry->value);
             entry->value = new_value;
-            return (int)real_idx;
+            return 0;
         }
 
         if (entry->key == NULL || entry->key == TOMBSTONE) {
@@ -83,7 +83,7 @@ int kv_put(kv_t * table, char * key, char * value) {
             entry->key = new_key;
             entry->value = new_value;
             table->count++;
-            return (int)real_idx;
+            return 0;
         }
     }
 
